@@ -1,0 +1,45 @@
+{% extends 'app_general/components/base.html' %}
+{%load static%}
+
+{%block content%}
+
+<section class="home-landing-section">
+    <div class="text-home-landing">
+        <h1 class="home-landing-text">TAOW</h1>
+        <h5 class="home-landing-text">Yothin Hinwan</h5>
+        <p class="home-landing-text"> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum pariatur ullam eius velit possimus unde, magnam rem modi necessitatibus laboriosam?</p>
+        <p>
+            <a class='btn' href="{%url 'food'%}">See all menu</a>
+            <a class='btn btn-primary' href="{%url 'subscription'%}">Get a promotion</a>
+        </p> 
+    </div>
+    
+</section>
+<section class="content-section">
+    <div class="content-container">
+        <h3 class="content-title text-center">Read me a little more</h3>
+        <div class="grid grid-3">
+            <div>
+                <img class="image-block" src="{%static 'app_general/home_about1.jpg'%}" alt="">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis tempore saepe ut tenetur odit dolore autem veniam illo? Modi, iusto?</p>    
+            </div>
+            
+            <div>
+                <img class="image-block" src="{%static 'app_general/home_about2.jpg'%}" alt="">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident ducimus assumenda consectetur autem voluptatibus corporis veniam sit odio expedita porro officia fugiat a molestias eaque placeat eveniet neque, maxime fuga!</p>    
+            </div>
+    
+            <div>
+                <img class="image-block" src="{%static 'app_general/home_about3.jpg'%}" alt="">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint tenetur, reiciendis minus totam nostrum omnis rem assumenda voluptates, consectetur, temporibus neque odit vel doloribus pariatur.</p>    
+            </div>
+        </div>
+        <p class="text-center">
+            <a class="btn" href="{%url 'about'%}">About us</a>
+        </p>
+    </div>
+
+</section>
+
+
+{%endblock%} 

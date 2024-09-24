@@ -1,0 +1,41 @@
+
+{% extends 'app_general/components/base.html' %}
+{% block title%} Our menu | {{food.title}}{%endblock%}
+{% load static%}
+{%block content%}
+ 
+<section class="content-section content-section-single">
+    <div class="content-container">
+        {% if food is not None%}
+            <div class="grid grid-2">
+                <img class="image-block" src="{%static food.image_relative_url%}" alt="">
+                <div>
+                    <h3>{{food.title}}</h3>
+                    {%if food.special_price is not None%}
+                        <p>
+                            <span>{{food.special_price}}</span>
+                            <del class="text-gray">{{food.price}}</del>
+                        </p>
+                    {%else%}
+                    <h2>{{food.price}}</h2>
+                    {%endif%}
+
+                    {%if food.is_premium%}
+                        <p>***special menu</p>
+
+                    {%endif%}
+                    <p> The promotion is available until {{food.promotion_end_at|date:'j N Y'}}</p>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus, aspernatur quaerat facere ab a magni nostrum tempora officiis, sit minima quos corporis odio laboriosam labore eveniet eaque distinctio tempore, illum dignissimos perferendis doloribus libero nemo nulla dolore. Odit, cupiditate deserunt.</p>
+                    <p>
+                        <a class='btn btn-primary' href="{%url 'subscription'%}">Get a promotion</a>
+                    </p>
+                </div>
+            </div> 
+
+        {%else%}
+            <p>No available menu</p>
+        {%endif%}
+    </div>
+</section>  
+
+{%endblock%}

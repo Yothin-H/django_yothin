@@ -1,0 +1,42 @@
+{% extends 'app_general/components/base.html' %} {% load static%} 
+{% block title%} Our menu{%endblock%} 
+{%block content%}
+
+<section class="content-section content-section-single">
+  <div class="content-container">
+    <h1 class="contennt-title">Our menu</h1>
+    {% if foods.count > 0%}
+        <div class="grid grid-3">
+            {%for food in foods%}
+                <div>
+                    <a href="{% url 'foodd' food.id %}">
+                        <img class="image-block" src="{%static food.image_relative_url%}" alt="" />
+                    </a>
+                    <h5 class="food-title">
+                        <a href="{% url 'foodd' food.id %}">{{food.title}}</a>
+                    </h5>
+
+                    {%if food.special_price is not None%}
+                    <p>
+                    <span>{{food.special_price}}</span>
+                    <del class="text-gray">{{food.price}}</del>
+                    </p>
+                    {%else%}
+                    <p>{{food.price}}</p>
+                    {%endif%} {%if food.is_premium%}
+                    <p>***special menu</p>
+
+                    {%endif%}
+                    <p>
+                    The promotion is available until {{food.promotion_end_at|date:'j N Y'}}
+                    </p>
+                </div>
+            {%endfor%}
+        </div>
+    {%else%}
+    <p>Upcoming</p>
+    {%endif%}
+  </div>
+</section>
+
+{%endblock%}

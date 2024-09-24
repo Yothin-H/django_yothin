@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap');
+.mitr-extralight {
+    font-family: "Mitr", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+  }
+  
+  .mitr-light {
+    font-family: "Mitr", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+  .mitr-regular {
+    font-family: "Mitr", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .mitr-medium {
+    font-family: "Mitr", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  .mitr-semibold {
+    font-family: "Mitr", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+  }
+  
+  .mitr-bold {
+    font-family: "Mitr", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+/* Global */
+*, ::before, ::after{
+    box-sizing: border-box;
+}
+
+html{
+    color: #333333;
+    font-family:"Mitr", sans-serif ;
+    font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6{
+    color: #111111;
+    font-weight: 400;
+    line-height: 1.4;
+    margin-top: 0px;
+    margin-bottom: 16px;
+
+}
+
+h1{
+    font-size: 32px;
+}
+
+h2{
+    font-size: 28px;
+}
+
+h3{
+    font-size: 24px;
+}
+
+h4{
+    font-size: 22px;
+}
+
+h5{
+    font-size: 20px;
+}
+
+h6{
+    font-size: 18px;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+a{
+    color: rgb(38, 96, 210);
+}
+
+.text-center{
+    text-align: center
+}
+
+.text-gray {
+    color: #888888;
+}
+
+.btn {
+    color: white;
+    background-color: #333333;
+    border: none;
+    border-radius: 8px;
+    font-weight: 400;
+    line-height: 1;
+    display: inline-block;
+    text-decoration: none;
+    padding: 8px 12px;
+    margin-bottom: 16px;
+}
+
+.btn-primary{
+    background-color: rgb(38, 96, 210);
+}
+
+.content-section {
+    padding: 64px 16px;
+}
+
+.content-container{
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content-container-narrow{
+    max-width: 600px;
+}
+
+.content-section-single {
+    min-height: calc(100vh - 120px);
+}
+
+.content-title{
+    margin-bottom: 24px;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 16px;
+    row-gap: 16px;
+    margin-bottom: 16px;
+}
+
+.image-block {
+    display: block;
+    max-width: 100%;
+    margin-bottom: 12px;
+}
+
+@media screen and (min-width:720px){
+    .grid-2 {
+        grid-template-columns: 1fr 1fr;
+    }
+    .grid-3 {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+/* Site header  */
+.site-header {
+    background-color: white;
+    border-bottom: 1px solid rgb(215, 215, 215);
+    box-shadow: box-shadow : 1px 2px 6px 4px rgba(0, 0, 0, 0.1);
+    display : flex;
+    justify-content: flex-start;
+    height :50px
+}
+
+.site-header-item {
+    color: #111111;
+    background-color: rgba(0, 0, 0,0);
+    font-weight: 400;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 0px 10px;
+    transition: background-color 300ms;
+}
+
+.site-header-item:hover {
+    background-color: rgba(0, 0, 0,0.1);
+}
+
+.site-header-brand img{
+    display: inline-block;
+    height: 32px;
+    margin-right: 8px;
+}
+
+
+/* Site footer  */
+.site-footer {
+    background-color: rgb(232, 232, 232);
+    text-align: center;
+    padding: 16px;
+}
+
+.site-footer-copyright{
+    font-size: 12px;
+}
+
+/* Form  */
+.form-field {
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+    margin-bottom: 4px;
+    line-height: 1.6;
+}
+
+input[type='text'],
+input[type='email'] {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background-color: white;
+    border: 1px solid #888888;
+    border-radius: 4px;
+    font-size: 16px;
+    display: block;
+    width: 100%;
+    height: 35px;
+    padding: 4px 12px;
+    outline: none;
+}
+
+input[type='text']:focus,
+input[type='email']:focus {
+    border-color: rgb(38, 96, 210);
+}
+
+.btn {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    color: white;
+    background-color: #333333;
+    border: none;
+    border-radius: 8px;
+    font-weight: 400;
+    line-height: 1;
+    display: inline-block;
+    text-decoration: none;
+    padding: 8px 12px;
+    margin-bottom: 16px;
+    cursor: pointer;
+}
+
+.btn-primary{
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background-color: rgb(38, 96, 210);
+}
+
+
+
+/* home-landing-section */
+.home-landing-section{
+    background: url('mom-pic.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align: center;
+    padding: 120px 16px;  
+    height: 50vh;  
+}
+
+.text-home-landing {
+    border: 1px solid rgba(254, 254, 254,0.8);
+    background-color: rgba(254, 254, 254, 0.8);
+}
+
+.home-landing-text {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+    margin-top: 0px;
+    margin-bottom: 24px;
+
+}
+
+/* Food  */
+
+.food-title a:not(:hover){
+    color: #111111;
+    text-decoration: none;
+}
