@@ -5,6 +5,26 @@
         <img src="{%static 'app_general/logo.webp'%}" alt="">
         <span>DJanraider</span>
     </a>
-    <a class="site-header-item" href="{%url 'food'%}">Menu</a>
-    <a class="site-header-item" href="{%url 'about'%}">About</a>
+
+    <a class="site-header-item" href="{%url 'food'%}">
+        <p>Menu</p>
+    </a>
+    <a class="site-header-item" href="{%url 'about'%}">
+        <p>About</p>
+    </a>
+    {%if user.is_authenticated%}
+    <a class="site-header-item" href="#">
+        <p>{{user.username}}</p>
+    </a>
+    <a class="site-header-item" href="{%url 'logout'%}">
+        <p>Log out</p>
+    </a>
+    {%else%}
+    <a class="site-header-item" href="{%url 'login'%}">
+        <p>Log in</p>
+    </a>
+    <a class="site-header-item" href="#">
+        <p>Sign up</p>
+    </a>
+    {%endif%}
 </header>
