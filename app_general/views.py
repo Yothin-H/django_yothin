@@ -25,6 +25,7 @@ def subscription(request):
             # new_sub.food_set.set(data['food_set'])
             form.save()
             return HttpResponseRedirect(reverse('thankyou'))
+            #return render(request,'app_general/subscription_thankyou.html')
     else:
         form = SubscriptionModelForm()
     context = {'form':form}
