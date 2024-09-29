@@ -4,7 +4,7 @@
 {%block content%}
 
 <section class="content-section content-section-single">
-    <div class="content-container">
+    <div class="content-container content-container-narrow">
         <h2 class="content-title">Sign up</h2>
         <form action="{% url 'registerrr'%}" method="post">
             {% csrf_token%}
@@ -32,7 +32,7 @@
                 <button class="btn btn-primary" type="submit">sign up</button>
             </p>
         </form>
-    </div>
+    </div> 
 </section>
 
 
