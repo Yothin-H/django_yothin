@@ -5,6 +5,7 @@ from django.http.response import HttpResponse
 from django.contrib.auth import login
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
  
@@ -22,3 +23,6 @@ def registerer(request: HttpRequest):
     context = {'form':form}
     return render(request,'app_user/register.html',context)
 
+@login_required #to validate whether log in or not but don't forget to add LOGIN_URL in setting
+def dashboard(request : HttpRequest):
+    return render(request,'app_user/dashboard.html')

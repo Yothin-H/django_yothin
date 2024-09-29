@@ -13,7 +13,7 @@
         <p>About</p>
     </a>
     {%if user.is_authenticated%}
-    <a class="site-header-item" href="#">
+    <a class="site-header-item" href="{% url 'dashboardeiei' %}">
         <p>{{user.username}}</p>
     </a>
     <a class="site-header-item" href="{%url 'logout'%}">
