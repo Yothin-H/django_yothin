@@ -1,0 +1,20 @@
+{% extends 'app_general/components/base.html' %}
+{% block title%}Logging in{%endblock%}
+
+{%block content%}
+
+<section class="content-section content-section-single">
+    <div class="content-container">
+        <h2 class="content-title">Sign up</h2>
+        <form action="{% url 'registerrr'%}" method="post">
+            {% csrf_token%}
+            {{form.as_p}}
+            <p>
+                <button class="btn btn-primary" type="submit">sign up</button>
+            </p>
+        </form>
+    </div>
+</section>
+
+
+{%endblock%}
