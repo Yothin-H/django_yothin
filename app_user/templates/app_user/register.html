@@ -8,6 +8,7 @@
         <h2 class="content-title">Sign up</h2>
         <form action="{% url 'registerrr'%}" method="post">
             {% csrf_token%}
+            {{form.non_field_errors}}
             <div class='form-field'>
                 {{form.username.label_tag}}
                 {{form.username}}

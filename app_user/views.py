@@ -6,6 +6,7 @@ from django.contrib.auth import login
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from .forms import UserProfileForm, ExtendedProfileForm
 
 # Create your views here.
  
@@ -26,3 +27,42 @@ def registerer(request: HttpRequest):
 @login_required #to validate whether log in or not but don't forget to add LOGIN_URL in setting
 def dashboard(request : HttpRequest):
     return render(request,'app_user/dashboard.html')
+
+@login_required
+def profile(request:HttpRequest):
+    user = request.user
+    is_new_profile = False
+    #POST
+    if request.method=='POST':
+        form = UserProfileForm(request.POST, instance=user) #instance=request.user for update data if you don't add this, it will add another user
+        try :
+            #Update
+            extended_form=ExtendedProfileForm(request.POST, instance=user.profile) # form with condition because this model needs to create new profile. The thing we need is if we have profile, it could edit but if not it could create
+        except :
+            #Create
+            extended_form=ExtendedProfileForm(request.POST) #for create new profile
+            is_new_profile=True
+
+        if form.is_valid() and extended_form.is_valid():
+            form.save()
+            if is_new_profile:
+                #Create
+                profile=extended_form.save(commit=False)
+                profile.user = user
+                profile.save()
+            else :
+                #Update
+                extended_form.save()
+            return HttpResponseRedirect(reverse('profileee'))
+    else :
+        form = UserProfileForm(instance=user)
+        try :
+            extended_form = ExtendedProfileForm(instance=user.profile)
+        except :
+            extended_form = ExtendedProfileForm()
+    #GET
+    context = {
+        'form':form,
+        'extended_form':extended_form
+    }
+    return render(request, 'app_user/profile.html',context)
