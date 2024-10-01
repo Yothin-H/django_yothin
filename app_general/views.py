@@ -5,6 +5,7 @@ from django.urls import reverse
 from app_food.models import Food
 from .models import Subscription
 from .forms import SubscriptionForm, SubscriptionModelForm
+from datetime import datetime, timedelta
 
 # Create your views here.
 def home(request:HttpRequest):
@@ -35,11 +36,19 @@ def subscription_thankyou(request:HttpRequest):
     return render(request,'app_general/subscription_thankyou.html') 
 
 def change_theme(request:HttpRequest):
-    response = HttpResponseRedirect(reverse('home'))
+    #Referer
+    referer = request.headers.get('referer')
+    if referer is not None:
+        response = HttpResponseRedirect(referer)
+    else:
+        response = HttpResponseRedirect(reverse('home'))
+
+
     #Change theme
     theme=request.GET.get('theme')
     if theme == 'dark':
-        response.set_cookie('theme','dark')
+        expired_date = datetime.now() + timedelta(days=365)
+        response.set_cookie('theme','dark',expires=expired_date)
     else:
         response.delete_cookie('theme')
     return response
