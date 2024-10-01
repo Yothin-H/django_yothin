@@ -1,5 +1,5 @@
 from django.http.response import HttpResponse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpRequest
 from django.shortcuts import render
 from django.urls import reverse
 from app_food.models import Food
@@ -7,13 +7,13 @@ from .models import Subscription
 from .forms import SubscriptionForm, SubscriptionModelForm
 
 # Create your views here.
-def home(request):
+def home(request:HttpRequest):
     return render(request,'app_general/home.html')
 
-def about(request):
+def about(request:HttpRequest):
     return render(request,'app_general/about.html')
 
-def subscription(request):
+def subscription(request:HttpRequest):
     if request.method=='POST':
         form=SubscriptionModelForm(request.POST)
         if form.is_valid():
@@ -31,5 +31,15 @@ def subscription(request):
     context = {'form':form}
     return render(request,'app_general/subscription_form.html',context)
 
-def subscription_thankyou(request):
+def subscription_thankyou(request:HttpRequest):
     return render(request,'app_general/subscription_thankyou.html') 
+
+def change_theme(request:HttpRequest):
+    response = HttpResponseRedirect(reverse('home'))
+    #Change theme
+    theme=request.GET.get('theme')
+    if theme == 'dark':
+        response.set_cookie('theme','dark')
+    else:
+        response.delete_cookie('theme')
+    return response

@@ -284,3 +284,10 @@ input[type='email']:focus {
     color: #111111;
     text-decoration: none;
 }
+
+/* Dark theme */
+
+body.dark {
+    color: white ; 
+    background-color: rgb(30, 29, 29);
+}
