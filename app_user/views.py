@@ -111,10 +111,12 @@ def profile(request:HttpRequest):
                 profile=extended_form.save(commit=False)
                 profile.user = user
                 profile.save()
-            else :
+            else : 
                 #Update
                 extended_form.save()
-            return HttpResponseRedirect(reverse('profileee'))
+            response= HttpResponseRedirect(reverse('profileee'))
+            response.set_cookie('is_saved','1')
+            return response
     else :
         form = UserProfileForm(instance=user)
         try :
@@ -122,8 +124,14 @@ def profile(request:HttpRequest):
         except :
             extended_form = ExtendedProfileForm()
     #GET
+    is_saved = request.COOKIES.get('is_saved') == '1'
+    flash_message = 'Saved' if is_saved else None
     context = {
         'form':form,
-        'extended_form':extended_form
+        'extended_form':extended_form,
+        'flash_message' : flash_message
     }
-    return render(request, 'app_user/profile.html',context)
+    response = render(request, 'app_user/profile.html',context)
+    if is_saved:
+        response.delete_cookie('is_saved')
+    return response

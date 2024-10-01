@@ -12,6 +12,10 @@
             <a href="{%url 'password_change'%}">Change Password</a>
         </p>
         <h5>Personal detail</h5>
+        {%if flash_message is not None%}
+            <p style="color: rgb(25, 121, 49); font-weight: bolder; font-size: larger;">" {{flash_message}} "</p>
+
+        {%endif%}
         <form action="{% url 'profileee'%}" method="post">
             {% csrf_token%}
             {{form.non_field_errors}}
