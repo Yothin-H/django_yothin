@@ -1,0 +1,16 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Activate account
+From: webmaster@localhost
+To: try5@mail.com
+Date: Tue, 01 Oct 2024 15:04:28 -0000
+Message-ID: 
+ <172779506842.40753.906214995726670315@1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa>
+
+Click for account activation
+
+<!-- http://127.0.0.1:8000/activate/Ng/ce84jg-c1715c65558d0ba9724c76ca9917e473 -->
+
+http://127.0.0.1:8000/user/activate/Ng/ce84jg-c1715c65558d0ba9724c76ca9917e473
+-------------------------------------------------------------------------------

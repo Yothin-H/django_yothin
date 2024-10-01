@@ -7,6 +7,12 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .forms import UserProfileForm, ExtendedProfileForm
+from .models import CustomUser
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes
+from .utils.activation_token_generator import activation_token_generator
 
 # Create your views here.
  
@@ -15,14 +21,69 @@ def registerer(request: HttpRequest):
     if request.method == 'POST':
         form=RegisterForm(request.POST)
         if form.is_valid():
-            user=form.save()
-            login(request, user) # register and be logged in automatically
-            return HttpResponseRedirect(reverse('home'))
+            #Register user
+            user: CustomUser =form.save(commit=False)
+            user.is_active=False
+            user.save()
+
+            # register and be logged in automatically
+            # login(request, user) 
+            
+            #Build email body html
+            context = {
+                'protocol': request.scheme,
+                'host' : request.get_host(),
+                'uidb64' : urlsafe_base64_encode(force_bytes(user.id)),
+                'token' : activation_token_generator.make_token(user)
+            }
+            email_body = render_to_string('app_user/activate_email.html',context)
+
+            #Send E-mail
+            email=EmailMessage(
+                to=[user.email],
+                subject='Activate account',
+                body=email_body
+            )
+            email.send()
+
+            return HttpResponseRedirect(reverse('registthank'))
     else:
         form = RegisterForm()
     #GET
     context = {'form':form}
     return render(request,'app_user/register.html',context)
+
+
+
+def register_thankyou(request:HttpRequest):
+    return render(request, 'app_user/register_thankyou.html')
+
+
+def activate(request : HttpRequest,uidb64:str, token:str):
+    title = 'Your email has activated'
+    description = 'You can go log in now'
+    button ='Go to log in'
+    link='login'
+    #Decode user id
+    id = urlsafe_base64_decode(uidb64).decode()
+
+    try :
+        user: CustomUser = CustomUser.objects.get(id=id)
+        if not activation_token_generator.check_token(user,token):
+            raise Exception('Check token false')
+        user.is_active=True
+        user.save()
+    except :
+        print ('Failed activation')
+        #In case of the link has been used
+        title = 'Activation is fail'
+        description = 'The link might be used'
+        button ='Go to Sign up'
+        link='registerrr'
+
+    context = { 'title':title, 'description':description,'button':button,'link':link}
+    return render(request,'app_user/activate.html',context)
+
 
 @login_required #to validate whether log in or not but don't forget to add LOGIN_URL in setting
 def dashboard(request : HttpRequest):
