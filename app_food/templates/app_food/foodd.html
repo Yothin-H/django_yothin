@@ -25,10 +25,25 @@
 
                     {%endif%}
                     <p> The promotion is available until {{food.promotion_end_at|date:'j N Y'}}</p>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus, aspernatur quaerat facere ab a magni nostrum tempora officiis, sit minima quos corporis odio laboriosam labore eveniet eaque distinctio tempore, illum dignissimos perferendis doloribus libero nemo nulla dolore. Odit, cupiditate deserunt.</p>
-                    <p>
-                        <a class='btn btn-primary' href="{%url 'subscription'%}">Get a promotion</a>
-                    </p>
+                    <p>{{food.description}}</p>
+
+                    {%if user.is_authenticated %}
+                        {%if not is_favorited_food%}
+                            <form action="{%url 'favfood' food.id%}" method="post">
+                                {%csrf_token%}
+                                {{form.as_p}}
+                                <div>
+                                    <button class="btn btn-primary" type="submit"> Add to favorite</button>
+                                </div>
+                            </form>
+                        {%else%}
+                            <p>This is your favorite food</p>
+                        {%endif%}
+                    {%else%}
+                        <p>
+                            <a class='btn btn-primary' href="{%url 'subscription'%}">Get a promotion</a>
+                        </p>
+                    {%endif%}
                 </div>
             </div> 
 
