@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG')=='True'
 
 production_host = os.getenv('PRODUCTION_HOST')
-ALLOWED_HOSTS = [production_host] if production_host is not None else []
+ALLOWED_HOSTS = [production_host] if production_host is not None else ['127.0.0.1']
 
 
 # Application definition
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -126,6 +127,8 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATIC_ROOT = 'static/'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

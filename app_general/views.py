@@ -6,12 +6,15 @@ from app_food.models import Food
 from .models import Subscription
 from .forms import SubscriptionForm, SubscriptionModelForm
 from datetime import datetime, timedelta
+from django.core.exceptions import PermissionDenied
 
 # Create your views here.
 def home(request:HttpRequest):
     return render(request,'app_general/home.html')
 
 def about(request:HttpRequest):
+    if not request.user.is_superuser :
+        raise PermissionDenied()
     return render(request,'app_general/about.html')
 
 def subscription(request:HttpRequest):
