@@ -12,6 +12,33 @@
             <a href="{%url 'password_change'%}">Change Password</a>
         </div>
         <p>I can access eiei</p>
+        <h5>Favorite Menu</h5>
+        {%for food_pivot in favorite_food_pivots %}
+            {%with food=food_pivot.food%}
+            <div>
+                <h3>{{food.title}}</h3>
+                <p>{{food_pivot.level_label}}</p>
+                    {%if food.special_price is not None%}
+                        <p>
+                            <span>{{food.special_price}}</span>
+                            <del class="text-gray">{{food.price}}</del>
+                        </p>
+                    {%else%}
+                    <h2>{{food.price}}</h2>
+                    {%endif%}
+
+                    {%if food.is_premium%}
+                        <p>***special menu</p>
+
+                    {%endif%}
+                    <p> The promotion is available until {{food.promotion_end_at|date:'j N Y'}}</p>
+                    <form action="{%url 'unfavfood' food.id%}" method="post">
+                        {%csrf_token%}
+                        <button type="submit">Delete</button>
+                    </form>
+            </div>
+            {%endwith%}
+        {%endfor%}
     </div>
 </section>
 

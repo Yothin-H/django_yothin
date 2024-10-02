@@ -6,6 +6,7 @@ from .forms import FavoriteFoodForm
 from django.http import HttpRequest, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from app_user.models import UserFavoriteFood
+from django.urls import reverse
 
 # Create your views here.
 def food(request):
@@ -59,3 +60,10 @@ def favorite_food(request:HttpRequest, food_id):
             print ('Create favorite' if is_created else 'Update')
 
     return HttpResponseRedirect(request.headers.get('referer'))
+
+
+@login_required
+def unfavorite_food(request:HttpRequest, food_id):
+    if request.method == 'POST':
+        request.user.favorite_food_set.remove(Food(id=food_id))
+    return HttpResponseRedirect(reverse('dashboardeiei'))

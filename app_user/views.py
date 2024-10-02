@@ -13,6 +13,7 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 from .utils.activation_token_generator import activation_token_generator
+from .models import UserFavoriteFood
 
 # Create your views here.
  
@@ -87,7 +88,10 @@ def activate(request : HttpRequest,uidb64:str, token:str):
 
 @login_required #to validate whether log in or not but don't forget to add LOGIN_URL in setting
 def dashboard(request : HttpRequest):
-    return render(request,'app_user/dashboard.html')
+    favorite_food_pivots = request.user.favorite_food_pivot_set.order_by('-level')
+    context = {'favorite_food_pivots':favorite_food_pivots}
+    return render(request,'app_user/dashboard.html', context)
+
 
 @login_required
 def profile(request:HttpRequest):

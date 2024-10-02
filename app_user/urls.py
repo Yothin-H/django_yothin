@@ -8,4 +8,5 @@ urlpatterns = [
     path('profile',views.profile, name='profileee'),
     path('register/thankyou',views.register_thankyou, name='registthank'),
     path('activate/<str:uidb64>/<str:token>',views.activate, name='activate'),
-]
+    
+] 
